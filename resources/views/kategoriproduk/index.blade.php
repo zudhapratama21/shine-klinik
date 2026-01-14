@@ -56,7 +56,7 @@
                         @csrf
                         <div class="form-group">
                             <label for="nama">Nama Kategori</label>
-                            <input type="text" class="form-control" id="name" name="nama"
+                            <input type="text" class="form-control" id="name" name="name"
                                 placeholder="Masukkan Nama Kategori">
                         </div>
 
