@@ -99,6 +99,8 @@ Route::middleware(Authenticate::class)->group(function () {
     Route::POST('penjualan/saveproductedit', [PenjualanController::class, 'saveProductEdit'])->name('penjualan.saveproductedit');
     Route::POST('penjualan/simpanedit', [PenjualanController::class, 'simpanEdit'])->name('penjualan.simpanedit');
 
+    Route::GET('penjualan/{id}/print', [PenjualanController::class, 'print'])->name('penjualan.print');
+
     Route::resource('penjualan', PenjualanController::class);
 
     // ============================= END OF PENJUALAN ==============================
@@ -126,6 +128,8 @@ Route::middleware(Authenticate::class)->group(function () {
     Route::delete('treatmentpasien/{id}/deleteproduk', [TreatmentPasienController::class, 'deleteProduk'])->name('treatmentpasien.deleteproduk');
 
     Route::resource('treatmentpasien', TreatmentPasienController::class);
+
+    Route::GET('treatmentpasien/{id}/print', [TreatmentPasienController::class, 'print'])->name('treatmentpasien.print');
 
     // ========================== END OF TREATMENT ================================
 

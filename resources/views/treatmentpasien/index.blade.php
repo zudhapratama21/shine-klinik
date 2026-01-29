@@ -33,10 +33,14 @@
                                 <th>{{ $item->dokter->nama_dokter }}</th>
                                 <th>{{ 'Rp ' . number_format($item->grandtotal, 0, ',', '.') }}</th>
                                 <th>
-                                     <a href="{{ route('treatmentpasien.inputproduk', ['id' => $item->id]) }}"
+                                    <a href="{{ route('treatmentpasien.inputproduk', ['id' => $item->id]) }}"
                                         class="btn btn-primary btn-sm"><i class="fas fa-box"></i></a>
                                 </th>
-                                <td>                                   
+                                <td style="width: 20%">
+                                    <a href="{{ route('treatmentpasien.print', ['id' => $item->id]) }}"
+                                        class="btn btn-outline-info btn-sm " target="_blank">
+                                        <i class="fas fa-print font-weight-bold"></i>
+                                    </a>
                                     <button type="button" class="btn btn-info btn-sm" data-toggle="modal"
                                         data-target="#show{{ $item->id }}"><i class="fas fa-eye"></i></button>
                                     <a href="{{ route('treatmentpasien.edit', ['treatmentpasien' => $item->id]) }}"

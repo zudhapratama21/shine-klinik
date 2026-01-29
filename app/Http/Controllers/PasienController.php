@@ -39,8 +39,7 @@ class PasienController extends Controller
             'tiktok' => $request->tiktok,
             'tanggal_lahir' => Carbon::parse($request->tanggal_lahir)->format('Y-m-d'),
         ]);
-
-        flash('Data berhasil disimpan');
+        
         return redirect()->route('pasien.index');
     }
 
@@ -72,21 +71,16 @@ class PasienController extends Controller
             'tiktok' => $request->tiktok,
             'tanggal_lahir' => Carbon::parse($request->tanggal_lahir)->format('Y-m-d'),
         ]);
-        
-        flash('Data berhasil disimpan');
+       
         return redirect()->route('pasien.index');
     }
 
    
     public function destroy(string $id)
     {
-        $pasien = \App\Models\Pasien::findOrFail($id);
-        if ($pasien->administrasi->count() >= 1) {
-            flash('Data tidak bisa dihapus karena sudah digunakan')->error();
-            return back();
-        }
+        $pasien = \App\Models\Pasien::findOrFail($id);      
         $pasien->delete();
-        flash('Data berhasil dihapus');
+        
         return back();
     }
 

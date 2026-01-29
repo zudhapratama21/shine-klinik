@@ -22,13 +22,19 @@
                         </tr>
                     </thead>
                     <tbody>
+
+                        {{-- @dd($penjualan) --}}
                         @foreach ($penjualan as $item)
                             <tr>
                                 <th>{{ $item->kode }}</th>
                                 <th>{{ \Carbon\Carbon::parse($item->tanggal)->format('d-m-Y') }}</th>
                                 <th>{{ $item->pasien->nama_pasien }}</th>
                                 <th>{{ 'Rp ' . number_format($item->grandtotal, 0, ',', '.') }}</th>
-                                <td>
+                                <td style="width: 20%">
+                                    <a href="{{ route('penjualan.print', ['id' => $item->id]) }}"
+                                        class="btn btn-outline-info btn-sm " target="_blank">
+                                        <i class="fas fa-print font-weight-bold"></i>
+                                    </a>
                                     <button type="button" class="btn btn-info btn-sm" data-toggle="modal"
                                         data-target="#show{{ $item->id }}"><i class="fas fa-eye"></i></button>
                                     <a href="{{ route('penjualan.edit', ['penjualan' => $item->id]) }}"

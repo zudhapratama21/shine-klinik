@@ -13,6 +13,7 @@ use App\Models\TreatmentPasienDetail;
 use App\Models\TreatmentPasienProduct;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class TreatmentPasienController extends Controller
 {
@@ -388,5 +389,27 @@ class TreatmentPasienController extends Controller
         }
 
         return back();
+    }
+
+
+    public function print ($id)
+    {
+        $treatment = TreatmentPasien::where('id', $id)->with('pasien', 'dokter')->first();
+        $treatmentdetail = TreatmentPasienDetail::where('treatmentpasien_id', $id)->with('treatment')->get();
+
+        $jmlBaris  = count($treatmentdetail);
+        $perBaris = 22;
+        $totalPage = ceil($jmlBaris / $perBaris);        
+        
+        $data = [
+            'totalPage' => $totalPage,
+            'perBaris' => $perBaris,
+            'date' => date('d/m/Y'),
+            'treatment' => $treatment,
+            'treatmentdetail' => $treatmentdetail,           
+        ];
+
+        $pdf = Pdf::loadView('treatmentpasien.print', $data)->setPaper('a5', 'landscape');
+        return $pdf->download( $treatment->kode . '.pdf');        
     }
 }

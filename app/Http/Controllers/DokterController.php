@@ -34,8 +34,7 @@ class DokterController extends Controller
             'status' => $request->status,
             'tanggal_lahir' => $request->tanggal_lahir,
             'alamat' => $request->alamat
-        ]);
-        flash('Data berhasil disimpan');
+        ]);        
         return redirect()->route('dokter.index');        
     }
 
@@ -64,8 +63,7 @@ class DokterController extends Controller
             'status' => $request->status,
             'tanggal_lahir' => $request->tanggal_lahir,
             'alamat' => $request->alamat
-        ]);
-        flash('Data berhasil diupdate');
+        ]);        
         return redirect()->route('dokter.index');
     }
 
@@ -73,8 +71,7 @@ class DokterController extends Controller
     public function destroy(string $id)
     {
         $dokter = Dokter::findOrFail($id);        
-        $dokter->delete();
-        flash('Data berhasil dihapus');
+        $dokter->delete();        
         return back();
     }
 

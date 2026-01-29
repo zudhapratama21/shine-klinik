@@ -8,30 +8,10 @@
                 <!-- list -->
                 <ul class="flex flex-col gap-2">
                   <li>
-                    <a href="#!" class="inline-block hover:text-green-600"
-                      >Vegetables & Fruits</a
+                    <a href="{{ route('index') }}" class="inline-block hover:text-green-600"
+                      >Home</a
                     >
-                  </li>
-                  <li>
-                    <a href="#!" class="inline-block hover:text-green-600"
-                      >Breakfast & instant food</a
-                    >
-                  </li>
-                  <li>
-                    <a href="#!" class="inline-block hover:text-green-600"
-                      >Bakery & Biscuits</a
-                    >
-                  </li>
-                  <li>
-                    <a href="#!" class="inline-block hover:text-green-600"
-                      >Atta, rice & dal</a
-                    >
-                  </li>
-                  <li>
-                    <a href="#!" class="inline-block hover:text-green-600"
-                      >Sauces & spreads</a
-                    >
-                  </li>                 
+                  </li>                               
                 </ul>
               </div>          
             </div>

@@ -7,6 +7,7 @@ use App\Models\Pasien;
 use App\Models\Penjualan;
 use App\Models\PenjualanDetail;
 use App\Models\Product;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -395,5 +396,26 @@ class PenjualanController extends Controller
         $penjualan->delete();
 
         return response()->json(['status' => 'success', 'message' => 'Penjualan berhasil dihapus.']);
+    }
+
+    public function print ($id)
+    {
+        $penjualan = Penjualan::with('details.produk','pasien')->findOrFail($id);
+        $jmlBaris  = $penjualan->details->count();
+        $perBaris = 22;
+        $totalPage = ceil($jmlBaris / $perBaris);
+        $ongkir = PenjualanDetail::where('penjualan_id', $id)->sum('ongkos_kirim');
+        
+        $data = [
+            'totalPage' => $totalPage,
+            'perBaris' => $perBaris,
+            'date' => date('d/m/Y'),
+            'penjualan' => $penjualan,
+            'penjualandetail' => $penjualan->details,
+            'ongkir' => $ongkir
+        ];
+
+        $pdf = Pdf::loadView('penjualan.print', $data)->setPaper('a5', 'landscape');
+        return $pdf->download( $penjualan->kode . '.pdf');
     }
 }
